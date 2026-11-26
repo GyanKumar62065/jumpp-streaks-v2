@@ -1,0 +1,6 @@
+.superpowers/
+.floci/
+__pycache__/
+.pytest_cache/
+*.pyc
+.playwright-mcp/

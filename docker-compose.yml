@@ -1,0 +1,52 @@
+x-app-env: &app-env
+  PYTHONPATH: /app
+  DATABASE_URL: postgresql://streaks:streaks@postgres:5432/streaks
+  S3_ENDPOINT_URL: http://floci:4566
+  S3_BUCKET: jumpp-streaks
+  STREAKS_DEFAULT_AS_OF: "2026-11-15T10:00:00+05:30"
+  AWS_ACCESS_KEY_ID: test
+  AWS_SECRET_ACCESS_KEY: test
+  AWS_DEFAULT_REGION: us-east-1
+
+services:
+  floci:
+    image: floci/floci:latest
+    # No host port: only services inside compose talk to S3 (host 4566 is often taken).
+    volumes:
+      - ./.floci:/app/data
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: streaks
+      POSTGRES_PASSWORD: streaks
+      POSTGRES_DB: streaks
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U streaks"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  seed:
+    build: .
+    command: ["python", "-m", "streaks.cli", "seed"]
+    volumes:
+      - .:/app
+    environment: *app-env
+    depends_on:
+      floci:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+
+  api:
+    build: .
+    command: ["uvicorn", "streaks.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment: *app-env
+    depends_on:
+      seed:
+        condition: service_completed_successfully

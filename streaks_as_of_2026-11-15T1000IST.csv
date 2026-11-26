@@ -1,0 +1,16 @@
+user_id,current_streak,status,reason
+u01,12,AT_RISK,"12-day streak, learned every recent day"
+u02,54,AT_RISK,"54-day streak, learned every recent day"
+u03,26,AT_RISK,"26-day streak; 2026-11-12 LEARNED_LATE_SYNC: Watched 121s offline, synced later"
+u04,0,BROKEN,"Streak reset on 2026-11-12: BELOW_THRESHOLD (Watched 28s, under 120s and no lesson finished)"
+u05,20,AT_RISK,"20-day streak, learned every recent day"
+u06,5,AT_RISK,5-day streak; 2026-11-09 REJECTED_TAMPER: Watch rejected: lesson v037 was published after the claimed watch time
+u07,72,AT_RISK,"72-day streak, learned every recent day"
+u08,313,AT_RISK,313-day streak; 2026-11-09 PROTECTED_OUTAGE: Our 09 Nov ingestion outage lost events; day protected
+u09,2,AT_RISK,"2-day streak, learned every recent day"
+u10,23,AT_RISK,"23-day streak, learned every recent day"
+u11,3,AT_RISK,3-day streak; 2026-11-11 NO_ACTIVITY: No lesson watched
+u12,9,AT_RISK,"9-day streak, learned every recent day"
+u13,58,AT_RISK,"58-day streak; 2026-11-12 LEARNED_LATE_SYNC: Watched 164s offline, synced later"
+u14,65,AT_RISK,"65-day streak; 2026-11-11 LEARNED_LATE_SYNC: Watched 136s offline, synced later"
+u15,30,AT_RISK,30-day streak; 2026-11-10 SKIPPED_TRAVEL: Timezone change made this day only 10.7h long
